@@ -4,13 +4,14 @@
   box-sizing: border-box;
 }
 
-#items {
+#items{
   position: relative;
   display: inline-block;
   transition: transform 0.3s ease;
+  color:black;
 }
 
-#items:hover {
+#items:hover, #item:hover{
   transform: translateY(-4px);
   transition: all 0.3s ease;
 }
@@ -29,7 +30,6 @@
 #items:hover::after {
   width: 100%;
 }
-
 
 
 @keyframes fadeInLogo {
@@ -77,3 +77,4 @@
   transform: scale(1.05);
   transition: all 0.3s ease;  
 }
+
