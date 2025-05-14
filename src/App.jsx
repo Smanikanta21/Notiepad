@@ -9,6 +9,7 @@ import Home from './components/Home.jsx';
 import Profile from './components/Profile.jsx'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '@vercel/speed-insights'
 function App() {
   return (
     <>
