@@ -5,11 +5,11 @@ import Nav from "./Nav.jsx";
 function Home() {
     const name = localStorage.getItem("name");
     const[notes, setNotes] = useState([]);
-    const[tittleSave,setTittleSave] = useState(null)
+    const[titleSave,settitleSave] = useState(null)
     const addNotes = () => {
         const newNotes = () => {
             id:Date.now()
-            tittle : ""
+            title : ""
         }
         setNotes([...notes,newNotes])
     }
@@ -22,7 +22,7 @@ function Home() {
 
     const editNotes = (index) =>{
         const updatedNotes = [...notes];
-        updatedNotes[index].tittle = e.target.value
+        updatedNotes[index].title = e.target.value
         
         setNotes(updatedNotes)
     }
@@ -39,20 +39,20 @@ function Home() {
                     gap-3 " onDoubleClick={{}}>
                         {notes.map((note,index)=> (
                             <div key={note.id} className="relative group p-4 mt-6 rounded shadow-md bg-white" autoFocus>
-                                {tittleSave === index ? (<input className="rounded-md text-xl font-semibold w-full h-8 border-b-2 p-2 " placeholder="Tittle" value={note.tittle} 
+                                {titleSave === index ? (<input className="rounded-md text-xl font-semibold w-full h-8 border-b-2 p-2 " placeholder="title" value={note.title} 
 
                                 onChange={(e) => {
                                     const updatedNotes = [...notes];
-                                    updatedNotes[index].tittle = e.target.value
+                                    updatedNotes[index].title = e.target.value
                                     setNotes(updatedNotes)
                                     console.log(setNotes)
                                     }}
                                 
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") {
-                                        setTittleSave(null)
+                                        settitleSave(null)
                                     }
-                                }}/>) : (<p className="text-xl font-semibold w-full cursor-pointer" onClick={() => setTittleSave(index)}>{note.tittle || "untitled"}</p>)}
+                                }}/>) : (<p className="text-xl font-semibold w-full cursor-pointer" onClick={() => settitleSave(index)}>{note.title || "untitled"}</p>)}
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-3 hidden group-hover:flex flex-row gap-2 bg-white border rounded shadow p-2 z-10">
                                     <button className="text-sm text-blue-600 hover:underline">Edit</button>
                                     <button className="text-sm text-yellow-600 hover:underline" onClick={editNotes}>Rename</button>
