@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext  , useState} from "react";
 import Nav from "./Nav.jsx";
+import {Pencil, PencilLine, Trash} from "lucide-react";
 
 function Home() {
     const name = localStorage.getItem("name");
@@ -54,9 +55,18 @@ function Home() {
                                     }
                                 }}/>) : (<p className="text-xl font-semibold w-full cursor-pointer" onClick={() => settitleSave(index)}>{note.title || "untitled"}</p>)}
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-3 hidden group-hover:flex flex-row gap-2 bg-white border rounded shadow p-2 z-10">
-                                    <button className="text-sm text-blue-600 hover:underline">Edit</button>
-                                    <button className="text-sm text-yellow-600 hover:underline" onClick={editNotes}>Rename</button>
-                                    <button className="text-sm text-red-600 hover:underline" onClick={deleteNotes}>Delete</button>
+                                    <div className="flex flex-col">
+                                        <button className="text-sm text-blue-600 hover:underline items-center flex justify-center hover:shadow-md"><Pencil size={16}/></button>
+                                        <span>edit</span>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <button className="text-sm text-yellow-600 hover:underline items-center flex justify-center hover:shadow-md" onClick={editNotes}><PencilLine size={18}/></button>
+                                        <span>rename</span>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <button className="text-sm text-red-600 hover:underline items-center flex justify-center hover:shadow-md" onClick={deleteNotes}><Trash size={18}/></button>
+                                        <span>delete</span>
+                                    </div>
                                 </div>
                             </div>
                         ))}

@@ -40,7 +40,7 @@ export default function LoginPage() {
                         <button type='button' className={`border text-xl px-4 py-1 rounded ${!isSwitch ? 'bg-blue-500 text-white' : 'bg-white text-black'}`} onClick={() => setIsSwitch(false)}>SignUp</button>
                         <button type='button' className={`border text-xl px-4 py-1 rounded ${isSwitch ? 'bg-blue-500 text-white' : 'bg-white text-black'}`} onClick={() => setIsSwitch(true)}>Login</button>
                     </div>
-                      <button type="button"className="relative  w-56 h-10 border border-black rounded-lg font-bold text-lg flex flex-row gap-4 items-center mb-6 bg-white hover:bg-indigo-600 hover:text-white transition" onClick={GoogleSignIn}>
+                      <button type="button"className="relative  w-56 h-10 border border-black rounded-lg font-bold text-lg flex flex-row  gap-4 items-center mb-6 bg-white hover:bg-indigo-600 justify-center hover:text-white transition" onClick={GoogleSignIn}>
                         Sign In with Google
                       </button>
                     <form className='flex flex-col items-center'>
