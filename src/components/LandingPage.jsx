@@ -7,7 +7,7 @@ export default function Home() {
         <h1 className="text-6xl font-bold text-indigo-700 mb-6 drop-shadow-lg">
           Welcome to NotiePad
         </h1>
-        <p className="text-lg text-gray-700 mb-8">
+        <p className="text-lg text-gray-700 mb-8 lg:mx-32 font-bold md:mx-20 sm:text-lg mx-5">
           NotiePad is a simple, user-friendly note-taking app that lets you quickly create, edit, and manage your thoughts with ease. Whether you're brainstorming or journaling, NotiePad keeps everything organized and accessible.
         </p>
         <button

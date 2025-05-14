@@ -1,5 +1,10 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
+
 import React, { useState } from 'react';
+
+
+import { toast } from 'react-toastify';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 const RenderSignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

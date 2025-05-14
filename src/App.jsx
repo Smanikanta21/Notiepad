@@ -7,20 +7,25 @@ import Contact from './components/Contact.jsx';
 import LoginPage from './components/LoginPage.jsx';
 import Home from './components/Home.jsx';
 import Profile from './components/Profile.jsx'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
-    <Router>
+    <>
+      <Router>
         <Routes>
-          <Route path="/gt" element={<LoginPage/>}/>
-          <Route path="/" element={<LandingPage/>} />
-          <Route element={<MainLayout/>}>
-            <Route path="/profile" element={<Profile/>}/>
-            <Route path="/home" element={<Home/>} />
-            <Route path="/about" element={<About/>} />
-            <Route path="/contact" element={<Contact/>} />
+          <Route path="/gt" element={<LoginPage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route element={<MainLayout />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
           </Route>
         </Routes>
-    </Router>
+      </Router>
+      <ToastContainer position="top-right" autoClose={2000} />
+    </>
   );
 }
 
