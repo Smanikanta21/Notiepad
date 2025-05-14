@@ -9,7 +9,8 @@ import { toast } from 'react-toastify';
 export default function LoginPage() {
     const navigate = useNavigate();
     const [isSwitch, setIsSwitch] = useState(false);
-    const GoogleSignIn = async() => {
+    const GoogleSignIn = async (e) => {
+        e.preventDefault();
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
