@@ -3,10 +3,27 @@ import { toast } from 'react-toastify';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from "lucide-react";
+import { sendPasswordResetEmail } from 'firebase/auth';
+
+const handlePasswordReset = async (email) => {
+    if (!email) {
+        toast.error("Please enter your email address");
+        return;
+    }
+    try {
+        await sendPasswordResetEmail(auth, email);
+        toast.success("Password reset email sent!");
+    } catch (error) {
+        toast.error("Error sending password reset email: " + error.message);
+        console.error("Error sending password reset email:", error);
+    }
+}
 
 const RenderSignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -43,13 +60,23 @@ const RenderSignIn = () => {
                 value={email}
                 onChange={(e)=> setEmail(e.target.value)}
             />
-            <input
-                type="password"
-                placeholder='Enter Password'
-                className='border-b h-10 w-72 mt-4 transition focus:outline-none'
+            <div className="relative w-72 mt-4">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                className="border-b h-10 w-full transition focus:outline-none pr-10"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-            />
+              />
+              <span
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </span>
+            </div>
+            <br />
+            <a href="#" onClick={(e) => { e.preventDefault(); handlePasswordReset(email); }}>Forgot Password?</a>
             <button
                 type="button"
                 onClick={handleLogin}

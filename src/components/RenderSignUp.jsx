@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import { Eye, EyeOff } from "lucide-react";
+
 const RenderSignUp = () => {
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -51,13 +54,21 @@ const RenderSignUp = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <input
-              className='border-b h-10 mt-4 w-72 transition focus:outline-none'
-              type="password"
-              placeholder='Enter your password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="relative w-72 mt-4">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                className="border-b h-10 w-full transition focus:outline-none pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </span>
+            </div>
             <button type='button' className='w-36 h-10 border border-black rounded-lg font-bold text-lg mt-10 hover:bg-indigo-600 hover:text-white' onClick={handleSignUp}>SignUp</button>
         </form>
     )
