@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import RenderSignUp from './RenderSignUp';
 import RenderSignIn from './RenderSignIn';
-import Google from '../assets/google.jpg';
 import { useNavigate } from 'react-router-dom';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase';
@@ -41,7 +40,6 @@ export default function LoginPage() {
                         <button type='button' className={`border text-xl px-4 py-1 rounded ${isSwitch ? 'bg-blue-500 text-white' : 'bg-white text-black'}`} onClick={() => setIsSwitch(true)}>Login</button>
                     </div>
                       <button type="button"className="relative  w-56 h-10 border border-black rounded-lg font-bold text-lg flex flex-row gap-4 items-center mb-6 bg-white hover:bg-indigo-600 hover:text-white transition" onClick={GoogleSignIn}>
-                        <img src={Google} alt="Google logo" className="w-5 h-5 ml-2" />
                         Sign In with Google
                       </button>
                     <form className='flex flex-col items-center'>
