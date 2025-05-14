@@ -9,7 +9,7 @@ import Home from './components/Home.jsx';
 import Profile from './components/Profile.jsx'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '@vercel/speed-insights'
+import { SpeedInsights } from "@vercel/speed-insights/react"
 function App() {
   return (
     <>
@@ -26,6 +26,22 @@ function App() {
         </Routes>
       </Router>
       <ToastContainer position="top-right" autoClose={2000} />
+      <SpeedInsights
+        projectId="your-project-id"
+        apiKey="your-api-key"
+        url="https://example.com"
+        options={{
+          strategy: "mobile",
+          locale: "en-US",
+          throttlingMethod: "devtools",
+          blockedUrlPatterns: ["*.js"],
+        }}
+        onSuccess={(data) => {
+          console.log("Speed insights data:", data);
+        }}
+        onError={(error) => {
+          console.error("Error fetching speed insights:", error);
+      }}/>
     </>
   );
 }
