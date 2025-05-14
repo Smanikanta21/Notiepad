@@ -21,9 +21,7 @@ const RenderSignUp = () => {
             navigate("/home");
         } catch (error) {
             console.log("Error creating user:", error);
-            toast.error(error.code === "auth/email-already-in-use" 
-                ? "Email already registered" 
-                : error.message);
+            toast.error(error.code === "auth/email-already-in-use" ? "Email already registered" : error.message);
         }
     };
 
