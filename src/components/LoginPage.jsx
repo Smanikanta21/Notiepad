@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import RenderSignUp from './RenderSignUp';
 import RenderSignIn from './RenderSignIn';
-import Google from '../assets/Google.jpg';
 import { useNavigate } from 'react-router-dom';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase';
