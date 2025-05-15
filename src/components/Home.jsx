@@ -1,8 +1,6 @@
 import { useContext  , useState, useEffect, useRef } from "react";
 import Nav from "./Nav.jsx";
 import {Pencil, PencilLine, Trash, MoreVertical, Logs, LayoutGrid} from "lucide-react";
-import { db } from "../firebase.js";
-import { collection, addDoc, getDoc, onSnapshot } from "firebase/firestore";
 
 function Home() {
     const inputRefs = useRef([]);
@@ -31,32 +29,14 @@ function Home() {
       }, 0);
     };
 
-    const addNotes = async () => {
-      try {
+    const addNotes = () => {
         const newNote = {
-          createdat: Date.now(),
-          title: ""
+            id: Date.now(),
+            title: ""
         };
-        const collectionRef = collection(db, "notes");
-        const docRef = await addDoc(collectionRef, newNote);
-        console.log("Document added with ID:", docRef.id);
-        setNotes(prev => [...prev, { id: docRef.id, ...newNote }]);
-      } catch (error) {
-        console.error("Error adding note:", error);
-      }
-    };
+        setNotes([...notes, newNote]);
+    }
 
-    useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, "notes"), (snapshot) => {
-            const fetchedNotes = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-            }));
-            setNotes(fetchedNotes);
-        });
-
-        return () => unsubscribe();
-    }, []);
 
     const deleteNotes = (index) => {
         const confirmed = window.confirm("Are you sure you want to delete this note?");
@@ -66,12 +46,17 @@ function Home() {
         setNotes(updatedNotes);
     }
 
+    const editNotes = (index) =>{
+        const updatedNotes = [...notes];
+        updatedNotes[index].title = e.target.value
+        setNotes(updatedNotes)
+    }
     return (
         <>
         <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-100 to-purple-100">
             <div className=" mt-6 font-bold space- h-[95vh] w-[100vw] md:w-[98vw] border rounded-lg shadow-md relative bg-white">
                 <div className= "m-8">
-                    <div className="flex md:pt-5 md:flex-row gap-4 items-center justify-between mt-9">
+                    <div className="flex flex-col md:flex-row gap-4 items-center justify-between mt-9">
                         <div  className="border border-gray-200 w-3/4 mt-12 flex items-center pl-7 lg:h-24">
                             <h1 className="text-3xl md:text-5xl"> Welcome back {name}</h1>
                         </div>
