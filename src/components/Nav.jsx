@@ -44,7 +44,7 @@ export default function Nav() {
         <Link id="items" to="/about" className='hover:text-[#007BFF] text-[18px]  nav-animate'>About</Link>
         <Link id="items" to="/contact" className='hover:text-[#007BFF] text-[18px] nav-animate'>Contact</Link>
         <div>
-          <Link id="item" to="/gt" className='p-1.5 bg-[#ff0000] hover:text-white text-[18px] rounded-md nav-animate' onClick={handleSignOut}>SignOut</Link>
+          <Link id="item" to="/gt" className='p-1.5 hover:bg-red-400 hover:text-white text-[18px] rounded-md nav-animate' onClick={handleSignOut}>SignOut</Link>
         </div>
       </div> 
     </div>

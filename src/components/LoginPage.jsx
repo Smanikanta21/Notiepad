@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase';
 import { toast } from 'react-toastify';
-
+import Google from '../assets/google.png';
 export default function LoginPage() {
     const navigate = useNavigate();
     const [isSwitch, setIsSwitch] = useState(false);
@@ -17,9 +17,11 @@ export default function LoginPage() {
             const user = result.user;
             const name = user.displayName;
             const usrimg = user.photoURL;
+            const email = user.email;
             console.log(usrimg)
             localStorage.setItem("name",name);
             localStorage.setItem("usrimg", usrimg);
+            localStorage.setItem("email", email);
             console.log(user);
             toast.success("Sign in successful");
             navigate("/home");
@@ -41,7 +43,7 @@ export default function LoginPage() {
                         <button type='button' className={`border text-xl px-4 py-1 rounded ${isSwitch ? 'bg-blue-500 text-white' : 'bg-white text-black'}`} onClick={() => setIsSwitch(true)}>Login</button>
                     </div>
                       <button type="button"className="relative  w-56 h-10 border border-black rounded-lg font-bold text-lg flex flex-row  gap-4 items-center mb-6 bg-white hover:bg-indigo-600 justify-center hover:text-white transition" onClick={GoogleSignIn}>
-                        Sign In with Google
+                        <img className='h-7 hover:hidden' src={Google}/>Sign In with Google
                       </button>
                     <form className='flex flex-col items-center'>
                         {isSwitch ? <RenderSignIn /> : <RenderSignUp />}

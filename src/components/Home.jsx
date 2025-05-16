@@ -8,14 +8,15 @@ function Home() {
     const[notes, setNotes] = useState([]);
     const[titleSave,settitleSave] = useState(null)
     const [showOptions, setShowOptions] = useState(null);
+    const [showGrid, setShowGrid] = useState("grid");
 
     const handleLogsClick = () => {
-      console.log("Logs icon clicked");
+      setShowGrid('log')
 
     };
 
     const handleGridClick = () => {
-      console.log("Grid icon clicked");
+      setShowGrid('grid')
     };
 
     const handleRename = (index) => {
@@ -60,16 +61,22 @@ function Home() {
                         <div  className="border border-gray-200 w-3/4 mt-12 flex items-center pl-7 lg:h-24">
                             <h1 className="text-3xl md:text-5xl"> Welcome back {name}</h1>
                         </div>
-                        <div className="flex flex-row gap-3 items-center justify-center border border-gray-300 p-2">
-                            <Logs size={25} onClick={handleLogsClick} className="pointer"/>
-                            <LayoutGrid size={25} onClick={handleGridClick} className="pointer"/>
+                        <div className="flex flex-row gap-3 items-center justify-center border border-gray-300 p-4">
+                            <Logs size={30} onClick={handleLogsClick} className={`cursor-pointer ${showGrid === "log" ? "bg-blue-500" : "bg-white" }`}/>
+                            <LayoutGrid size={30} onClick={handleGridClick} className={`cursor-pointer  ${showGrid === "grid" ? "bg-blue-500 " : "bg-white"}`}/>
                         </div>
                     </div>
                     <button className="w-14 h-14 px-4 py-2 absolute bottom-6 right-5 rounded-full bg-blue-500 text-white hover:bg-blue-600 text-3xl" onClick={addNotes}>+</button>
-                    <div className="grid md:grid-cols-3 md:h-32 md:
-                    gap-3 " onDoubleClick={{}}>
+                    <div className={`${showGrid === "grid" ? "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4" : "flex flex-col gap-4"} max-h-[69vh] z-20 p-3 overflow-y-auto`}>
                         {notes.map((note,index)=> (
-                            <div key={note.id} className="relative group p-4 mt-6 rounded shadow-md bg-white" autoFocus>
+                            <div
+                              key={note.id}
+                              className={`relative z-20 group p-6 rounded shadow-md transition-all duration-300 ease-in-out transform ${
+                                showGrid === "log"
+                                  ? "w-full bg-white scale-100 opacity-100"
+                                  : "bg-white scale-95 opacity-90"
+                              }`}
+                            >
                                 <MoreVertical
                                   size={20}
                                   onClick={() => setShowOptions(showOptions === index ? null : index)}
@@ -92,12 +99,12 @@ function Home() {
                                     }
                                 }}/>) : (<p className="text-xl font-semibold w-full cursor-pointer" onClick={() => settitleSave(index)}>{note.title || "untitled"}</p>)}
                                 {showOptions === index && (
-                                  <div className="absolute right-2 top-10 flex flex-col gap-2 bg-white border rounded shadow p-2 z-10 md:hidden">
+                                  <div className="absolute right-2 top-10 flex flex-col gap-2 bg-white border rounded shadow p-2 z-[999999] md:hidden">
                                     <div className="flex flex-col justify-center items-center">
                                         <button className="text-blue-600"><Pencil size={16} /></button></div>
                                         <span>edit</span>
                                     <div className="flex flex-col justify-center items-center">
-                                        <button className="text-yellow-600" onClick={() => handleRename(index)}><PencilLine size={18} /></button></div>
+                                        <button className="text-yellow-600" onClick={()=> handleRename(index)} ><PencilLine size={18} /></button></div>
                                         <span>rename</span>
                                     <div className="flex flex-col justify-center items-center">
                                         <button className="text-red-600" onClick={() => deleteNotes(index)}><Trash size={18} /></button></div>
@@ -106,7 +113,7 @@ function Home() {
                                 )}
                                 <div className="absolute hidden flex-row md:top-0 md:left-1/2 md:-translate-x-1/2 md:-translate-y-3 md:hidden md:group-hover:flex md:flex-row md:gap-2 bg-white border rounded shadow p-2 z-10">
                                     <div className="flex flex-col">
-                                        <button className="text-sm text-blue-600 hover:underline items-center flex justify-center hover:shadow-md"><Pencil size={16}/></button>
+                                        <button className="text-sm text-blue-600 hover:underline items-center flex justify-center hover:shadow-md" ><Pencil size={16}/></button>
                                         <span>edit</span>
                                     </div>
                                     <div className="flex flex-col">
