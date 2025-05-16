@@ -25,26 +25,57 @@ export default function Nav() {
   }
   return(
   <div className='fixed top-0 left-0 right-0 z-10 flex justify-center items-center p-4 '>
-    <div className='flex md:justify-between justify-start gap-24 lg:gap-0 items-center p-[10px] bg-white border-[1px] border-gray-300 rounded-[18px] shadow-[0_4px_8px_rgba(0,0,0,0.1)] pl-4 pr-4 navbar-expand'>
-      <div className="md:hidden visible rounded-full" onClick={(e) => {
-        e.preventDefault();
-        setHamNav(!hamNav)
-      }}>
-        <span class="material-symbols-outlined">menu</span>
+    <div className='flex justify-between items-center w-full max-w-5xl p-[10px] bg-white border-[1px] border-gray-300 rounded-[18px] shadow-[0_4px_8px_rgba(0,0,0,0.1)] px-4'>
+
+      <div className="flex items-center md:hidden">
+        <div className="rounded-full mr-2" onClick={(e) => {
+          e.preventDefault();
+          setHamNav(!hamNav);
+        }}>
+          <span className="material-symbols-outlined">menu</span>
+        </div>
       </div>
-      <div className='logo logo-animate'>
-        <Link className="font-extrabold items-center" to="/">NotiePad</Link>
+
+      <div className="text-center flex-grow">
+        <Link className="font-extrabold text-lg" to="/ho">NotiePad</Link>
       </div>
-      <div className='gap-[20px] hidden md:flex'>
-        <Link to="/profile" className="flex flex-row justify-center items-center gap-2">
-          <img className="h-8 w-8 rounded-full flex items-center justify-center nav-animate" src={usrimg} alt="image"/>
-          <p className="items-center justify-center nav-animate font-semibold text-xl">{name}</p>
+
+      <div className="flex items-center">
+        <Link to="/profile" className="flex items-center gap-2">
+          <img className="h-8 w-8 rounded-full nav-animate" src={usrimg} alt="Profile" />
         </Link>
-        <Link id="items" to="/home" className='hover:text-[#007BFF] text-[18px]  nav-animate'>Home</Link>
-        <Link id="items" to="/about" className='hover:text-[#007BFF] text-[18px]  nav-animate'>About</Link>
-        <Link id="items" to="/contact" className='hover:text-[#007BFF] text-[18px] nav-animate'>Contact</Link>
-        <div>
-          <Link id="item" to="/gt" className='p-1.5 hover:bg-red-400 hover:text-white text-[18px] rounded-md nav-animate' onClick={handleSignOut}>SignOut</Link>
+      </div>
+
+      {hamNav && (
+        <div className={`absolute top-[70px] left-9 bg-white rounded-lg shadow-lg border border-gray-200 p-4 flex flex-col gap-2 z-50 block md:hidden transition-all duration-300 ease-out transform origin-top ${hamNav ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}>
+          <Link to="/home" className="hover:text-[#007BFF] text-[16px]">Home</Link>
+          <Link to="/about" className="hover:text-[#007BFF] text-[16px]">About</Link>
+          <Link to="/contact" className="hover:text-[#007BFF] text-[16px]">Contact</Link>
+          <button
+            onClick={handleSignOut}
+            className="text-red-500 hover:text-white hover:bg-red-500 px-3 py-1 rounded text-[16px]"
+          >
+            Sign Out
+          </button>
+        </div>
+      )}
+
+      <div className="gap-[20px] hidden md:flex">
+        <div className="flex flex-col justify-center items-center gap-2">
+          <Link to="/profile" className="flex flex-row justify-center items-center gap-2">
+            <img className="h-8 w-8 rounded-full flex items-center justify-center nav-animate" src={usrimg} alt="image"/>
+          </Link>
+        </div>
+        <div className="bg-white rounded-lg p-2 flex flex-row gap-2 z-50">
+          <Link to="/home" className="hover:text-[#007BFF] text-[16px]">Home</Link>
+          <Link to="/about" className="hover:text-[#007BFF] text-[16px]">About</Link>
+          <Link to="/contact" className="hover:text-[#007BFF] text-[16px]">Contact</Link>
+          <button
+            onClick={handleSignOut}
+            className="text-red-500 hover:text-white hover:bg-red-500 px-3 rounded text-[16px]"
+          >
+            Sign Out
+          </button>
         </div>
       </div> 
     </div>
